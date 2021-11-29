@@ -132,7 +132,7 @@ export function DiscoverLegacy({
   updateSavedQueryId,
   vis,
 }: DiscoverLegacyProps) {
-  const [isSidebarClosed, setIsSidebarClosed] = useState(false);
+  const [isSidebarClosed, setIsSidebarClosed] = useState(true);
   const { TopNavMenu } = getServices().navigation.ui;
   const { savedSearch, indexPatternList } = opts;
   const bucketAggConfig = vis?.data?.aggs?.aggs[1];
