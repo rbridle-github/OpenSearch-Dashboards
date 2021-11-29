@@ -35,7 +35,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { first, take } from 'rxjs/operators';
 import { i18n } from '@osd/i18n';
 
-import Axios from 'axios';
+//import Axios from 'axios';
 // @ts-expect-error untyped internal module used to prevent axios from using xhr adapter in tests
 import AxiosHttpAdapter from 'axios/lib/adapters/http';
 import { UiPlugins } from '../plugins';
@@ -319,14 +319,23 @@ export class RenderingService {
       this.logger.get('branding').info(configName + ' config is not found or invalid.');
       return false;
     }
-    return await Axios.get(url, { adapter: AxiosHttpAdapter, maxRedirects: 0 })
-      .then(() => {
-        return true;
-      })
-      .catch(() => {
-        this.logger.get('branding').info(configName + ' config is not found or invalid');
-        return false;
-      });
+    // TAIPAN-120: There a couple of issues with performing this URL check:
+    //
+    //             1.) URLs are required to be absolute, therefore when running opensearch-dashboards inside a container
+    //                 and referencing static files hosted in an adjacent nginx container, https://nginx/xxxx will work,
+    //                 but will not work when the URL is called from the browser, <img src=https://nginx/xxxxx
+    //             2.) when running locally, Axios will reject self-signed hosting of the image files, and the browser
+    //                 not like calling http inside a page that is served up over https.
+    //
+    // return await Axios.get(url, { adapter: AxiosHttpAdapter, maxRedirects: 0 })
+    //   .then(() => {
+    //     return true;
+    //   })
+    //   .catch(() => {
+    //     this.logger.get('branding').info(configName + ' config is not found or invalid');
+    //     return false;
+    //   });
+    return true;
   };
 
   /**
