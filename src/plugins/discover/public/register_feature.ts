@@ -36,7 +36,7 @@ export function registerFeature(home: HomePublicPluginSetup) {
   home.featureCatalogue.register({
     id: 'discover',
     title: i18n.translate('discover.discoverTitle', {
-      defaultMessage: 'Discover',
+      defaultMessage: 'Search',
     }),
     subtitle: i18n.translate('discover.discoverSubtitle', {
       defaultMessage: 'Search and find insights.',

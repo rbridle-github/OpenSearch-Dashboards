@@ -254,7 +254,7 @@ export class DiscoverPlugin
     this.docViewsRegistry.setAngularInjectorGetter(this.getEmbeddableInjector);
     core.application.register({
       id: 'discover',
-      title: 'Discover',
+      title: 'Search',
       updater$: this.appStateUpdater.asObservable(),
       order: 1000,
       euiIconType: 'inputOutput',
